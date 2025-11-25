@@ -1,7 +1,8 @@
 # Firewall + VLAN Lab (OPNsense on UTM / macOS M1)
 
 This project documents the creation of a fully virtualized firewall and network segmentation lab using OPNsense, UTM, and multiple isolated virtual networks. It simulates a small-company environment with LAN and GUEST networks, routing, DHCP, and firewall rules.
-The goal is to practice essential skills for IT system administration and prepare for the IT Specialist for System Integration role.
+The goal of this lab is to practice network segmentation, firewall configuration, and multi-network routing in a controlled environment. This project simulates a small business network with restricted guest access and a protected internal LAN.
+
 
 ## 1. Project Overview
 
