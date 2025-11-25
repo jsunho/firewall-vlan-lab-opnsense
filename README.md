@@ -1,47 +1,68 @@
 # Firewall + VLAN Lab (OPNsense on UTM / macOS M1)
 
-This project documents the creation of a fully virtualized firewall and network segmentation lab using OPNsense, UTM, and multiple isolated virtual networks. It simulates a small-company environment with LAN and GUEST networks, routing, DHCP, and firewall rules.
-The goal of this lab is to practice network segmentation, firewall configuration, and multi-network routing in a controlled environment. This project simulates a small business network with restricted guest access and a protected internal LAN.
+This project documents a fully isolated network lab using OPNsense, UTM, and multiple virtual networks.
+The environment simulates a small-business infrastructure with segmented LAN and GUEST networks, firewall rules, DHCP, DNS, and controlled routing paths.
+
+The goal of this lab is to practice real-world system integration skills: network design, segmentation, firewall administration, virtualization, and troubleshooting.
 
 
-## 1. Project Overview
+## 1. Architecture Overview
 
-The lab consists of three virtual networks connected through an OPNsense firewall:
-  - WAN – Internet access through UTM's shared network (NAT)
-  - LAN – Primary internal network (192.168.10.0/24)
-  - GUEST – Isolated network with restricted access (192.168.20.0/24)
+The lab consists of:
+  - 1× OPNsense Firewall (amd64, emulated on Apple Silicon)
+  - 1× LAN client VM (ARM64 Linux)
+  - 1× GUEST client VM (ARM64 Linux)
+  - 3 virtual networks in UTM:
+    - WAN → NAT to macOS (internet access)
+    - LAN → internal network (trusted)
+    - GUEST → isolated network (restricted)
 
-The setup includes:
-  - An OPNsense firewall (AMD64, emulated on Apple Silicon)
-  - A LAN client (ARM64 Linux VM)
-  - A GUEST client (ARM64 Linux VM)
+This setup mirrors infrastructure commonly found in small and medium-sized organizations.
 
-This setup mirrors a real-world small business infrastructure with segmented networks and controlled access.
-
-The lab runs on **UTM** on a **macOS M1** host and uses several virtual machines
-(OPNsense + Linux clients/servers).
-
-## 3. Lab Topology
+## 2. Network Topology
 
 ```
-          +-----------------------+
-          |       macOS Host      |
-          +-----------------------+
-                   | (NAT)
-                   v
-            [ WAN - OPNsense ]
-                   |
-        +----------+-----------+
-        |                      |
-     [LAN]                 [GUEST]
-192.168.10.0/24       192.168.20.0/24
-   Client VM              Client VM
+               +-------------------------+
+               |        macOS Host       |
+               |   (UTM Shared Network)  |
+               +-----------+-------------+
+                           |
+                        [ WAN ]
+                           |
+                     +-----+-----+
+                     | OPNsense  |
+                     +-----+-----+
+                           |
+               +-----------+-----------+
+               |                       |
+            [ LAN ]                 [ GUEST ]
+        192.168.10.0/24           192.168.20.0/24
+            Linux VM                  Linux VM
+
 ```
 
 A full editable diagram is available in:
 diagram/network-topology.drawio
 
-## Repository Structure
+## 3. Addressing Plan
+
+LAN Network
+  - Subnet: 192.168.10.0/24
+  - Gateway: 192.168.10.1 (OPNsense LAN interface)
+  - DHCP: provided later by OPNsense
+  - Purpose: main internal network for trusted clients
+
+GUEST Network
+  - Subnet: 192.168.20.0/24
+  - Gateway: 192.168.20.1 (OPNsense OPT1 interface)
+  - DHCP: provided later by OPNsense
+  - Purpose: isolated guest environment with restricted access
+
+WAN Network
+  - Provided by UTM (NAT)
+  - DHCP from host → used for internet access
+
+## 4. Repository Structure
 
 ```
 ├── README.md
@@ -59,7 +80,7 @@ diagram/network-topology.drawio
 ```
 Each document describes one part of the lab and makes it reproducible.
 
-## Current Status
+## 5. Current Status
 
 - [x] UTM environment prepared
 - [x] OPNsense installed (ZFS)
@@ -74,26 +95,20 @@ Each document describes one part of the lab and makes it reproducible.
 - [ ] Firewall rules implemented
 - [ ] Documentation finalized
 
-## Key Learnings and Concepts
+## 6. Key Learnings and Concepts
 
-This lab demonstrates:
-  - The difference between virtualization (ARM64) and emulation (x86_64)
-  - How UTM handles networking (Shared, Bridged, Isolated)
-  - Assigning and configuring multiple network interfaces in OPNsense
+During the project I worked with:
+  - Virtualization vs. emulation on Apple Silicon
+  - UTM networking (Shared vs. Isolated mode)
+  - Assigning interfaces in OPNsense (em0, em1, em2)
+  - Static IP configuration and subnetting
+  - DHCP, DNS, and routing fundamentals
+  - Writing firewall rules (allow/deny policies, segmentation)
+  - Testing connectivity (ping, traceroute, DNS tests)
+  - Using and securing the OPNsense WebGUI
+  - Creating reproducible documentation
 
-  - Setting static IPs and IPv4 subnets
-
-  - Routing between networks
-
-  - Creating and testing firewall rules
-
-  - Segmentation between LAN and GUEST VLANs
-
-  - Using a firewall web interface (OPNsense GUI)
-
-  - Understanding DHCP and DNS behavior in segmented networks
-  
-These skills reflect practical tasks in real IT system integration work.
+These are all relevant to real-world system administration and system integration work.
 
 ## Goals of the Project
 
