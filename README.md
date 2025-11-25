@@ -40,7 +40,7 @@ diagram/network-topology.drawio
 
 ## Repository Structure
 
-.
+```
 ├── README.md
 ├── docs/
 │   ├── 01_intro.md
@@ -51,14 +51,9 @@ diagram/network-topology.drawio
 │   ├── 06_firewall_rules.md
 │   ├── 07_results.md
 │   └── screenshots/
-│       ├── opnsense_boot.png
-│       ├── opnsense_menu.png
-│       ├── interface_list.png
-│       ├── webgui_login.png
-│       └── ...
 └── diagram/
     └── network-topology.drawio
-
+```
 Each document describes one part of the lab and makes it reproducible.
 
 ## Current Status
