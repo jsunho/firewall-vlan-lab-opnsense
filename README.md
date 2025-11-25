@@ -22,6 +22,7 @@ The lab runs on **UTM** on a **macOS M1** host and uses several virtual machines
 
 ## 3. Lab Topology
 
+```
           +-----------------------+
           |       macOS Host      |
           +-----------------------+
@@ -31,10 +32,10 @@ The lab runs on **UTM** on a **macOS M1** host and uses several virtual machines
                    |
         +----------+-----------+
         |                      |
-        +                      +
      [LAN]                 [GUEST]
 192.168.10.0/24       192.168.20.0/24
    Client VM              Client VM
+```
 
 A full editable diagram is available in:
 diagram/network-topology.drawio
