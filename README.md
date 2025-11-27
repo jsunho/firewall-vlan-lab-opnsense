@@ -88,11 +88,11 @@ Each document describes one part of the lab and makes it reproducible.
 - [x] LAN = 192.168.10.1
 - [x] GUEST = 192.168.20.1
 - [x] WAN via DHCP
-- [ ] LAN client VM configured
-- [ ] GUEST client VM configured
-- [ ] WebGUI access tested
-- [ ] DHCP services configured
-- [ ] Firewall rules implemented
+- [x] LAN client VM configured
+- [x] GUEST client VM configured
+- [x] WebGUI access tested
+- [x] DHCP services configured
+- [x] Firewall rules implemented
 - [ ] Documentation finalized
 
 ## 6. Key Learnings and Concepts
