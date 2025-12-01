@@ -41,6 +41,9 @@ The LAN and GUEST networks are isolated from each other at the UTM level; all ro
     - CPU: 2 cores recommended
     - Disk: 16–32 GB
     - Boot ISO: OPNsense installation image
+
+![OPNsense VM architecture](screenshots/utm_firewall_vm_architecture.png)
+
 ### Network Interfaces (in order)
     - em0 → WAN (Shared Network)
     - em1 → LAN (Isolated Network)
@@ -53,11 +56,11 @@ This order ensures the interfaces match the addressing plan later on.
 Two lightweight Linux VMs are prepared:
 
 ### LAN Client
-    - Architecture: ARM64
+    - Architecture: x84_64
     - Network: LAN isolated network
     - Receives IP via DHCP from OPNsense
 ### GUEST Client
-    - Architecture: ARM64
+    - Architecture: x84_64
     - Network: GUEST isolated network
     - Receives IP via DHCP from OPNsense
 
