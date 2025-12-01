@@ -1,30 +1,29 @@
 ## Interface Configuration
 
-After the initial installation, the default OPNsense interface configuration must be adapted to match the project’s network design. This includes setting static IPv4 addresses for the LAN and GUEST networks, enabling DHCP services where required, and preparing the system for client connectivity.
+After installing OPNsense, I needed to change the default interface settings so they match the network layout of this project. In this step, I set the IP addresses for the LAN and GUEST networks. These addresses will later be used by the client VMs and by the firewall rules.
 
 ## 1. Overview of Required Network Layout
 
-The following addresses will be applied:
+For this lab, I use the following IP addresses:
 
   - LAN: 192.168.10.1/24
   - GUEST: 192.168.20.1/24
   - WAN: DHCP (no change)
 
-These values correspond to the network plan defined in the project structure.
+This is the addressing plan I use throughout the project.
 
 ## 2. Accessing the Console Menu
 
-At the OPNsense console, select:
+Inside the OPNsense console menu, I selected:
 
   2) Set interface IP address
 
-The system will ask which interface should be configured.
+After that, OPNsense asks which interface I want to configure.
 
 ## 3. Configuring the LAN Interface (em1)
 
-Select LAN when prompted.
-
-Apply the following values:
+When I select the LAN interface, OPNsense asks a few questions.
+I entered the following values:
 
   - IPv4 address: 192.168.10.1
   - Subnet mask: /24
@@ -32,17 +31,17 @@ Apply the following values:
   - Enable DHCP server on LAN: N
   - Revert to HTTP instead of HTTPS: N
 
-The console will apply the configuration and display the new LAN address.
+Once confirmed, OPNsense updates the LAN address.
 
 ## 4. Configuring the GUEST Interface (OPT1 / em2)
 
-Run the same menu option again:
+To configure the GUEST interface, I repeated the same menu option:
 
   2) Set interface IP address
 
-Select OPT1.
+Then I select OPT1.
 
-Apply the following values:
+Here I entered:
 
   - IPv4 address: 192.168.20.1
   - Subnet mask: /24
@@ -50,27 +49,29 @@ Apply the following values:
   - Enable DHCP server on OPT1: N
   - Revert to HTTP instead of HTTPS: N
 
-After confirmation, the new interface configuration becomes active.
+After confirming, the new IP for the GUEST network becomes active.
 
 ## 5. Verifying the Configuration
 
-To view the current interface assignments, select:
+To make sure everything is set correctly, I opened the menu:
 
   1) Assign interfaces
 
-Expected result:
+Here OPNsense shows the current interface assignments.
+It should look like this:
 
   - LAN (em1) → 192.168.10.1/24
   - OPT1 (em2) → 192.168.20.1/24
   - WAN (em0) → DHCP
 
-If the addresses match, the system is ready for WebGUI access.
+If these values match, the interface setup is complete.
 
 ## 6. Accessing the WebGUI
 
-The OPNsense WebGUI is not accessed from the firewall console.
-To continue, switch to the LAN client VM, which will be prepared in the next chapter.
-Once the client is configured and connected to the LAN-Net, the WebGUI can be opened at:
+The WebGUI cannot be opened from the firewall console itself.
+To continue, I switch to the LAN client VM (configured in the next chapter).
+Once that VM is connected to LAN-Net, I can open the OPNsense WebGUI in a browser:
 
-  - https://192.168.10.1
+  https://192.168.10.1
 
+This is the address I will use to continue the setup in the next part of the project.
