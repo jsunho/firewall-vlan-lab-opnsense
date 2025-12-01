@@ -156,12 +156,22 @@ Both VMs:
     ping 8.8.8.8 
 
   LAN VM
-  
+
 ![Ping Test LAN to Internet](screenshots/ping_test_lan_to_internet.png)
 
   GUEST VM
 
 ![Ping Test Guest to Internet](screenshots/ping_test_guest_to_internet.png)
+
+## 6. Next Steps
+
+With all firewall rules in place, the next step is to configure:
+  
+  - DHCP for LAN and GUEST
+  - DNS services
+  - Final connectivity tests
+
+This will be covered in the next document.
 
 
 
