@@ -56,11 +56,11 @@ This order ensures the interfaces match the addressing plan later on.
 Two lightweight Linux VMs are prepared:
 
 ### LAN Client
-    - Architecture: x84_64
+    - Architecture: ARM64 (aarch64)
     - Network: LAN isolated network
     - Receives IP via DHCP from OPNsense
 ### GUEST Client
-    - Architecture: x84_64
+    - Architecture: ARM64 (aarch64)
     - Network: GUEST isolated network
     - Receives IP via DHCP from OPNsense
 
