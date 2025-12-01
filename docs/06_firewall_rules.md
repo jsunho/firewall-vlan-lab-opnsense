@@ -156,6 +156,7 @@ Both VMs:
     ping 8.8.8.8 
 
   LAN VM
+  
 ![Ping Test LAN to Internet](screenshots/ping_test_lan_to_internet.png)
 
   GUEST VM
