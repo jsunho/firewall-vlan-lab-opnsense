@@ -76,6 +76,7 @@ These machines are used to verify segmentation, firewall behavior, and DNS/Inter
 ## Summary
 
 At this stage, the UTM environment provides the following:
+
     - Three isolated virtual networks
     - One emulated OPNsense firewall VM connected to all networks
     - Two client VMs connected to their respective LAN and GUEST networks
