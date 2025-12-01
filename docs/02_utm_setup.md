@@ -49,6 +49,8 @@ The LAN and GUEST networks are isolated from each other at the UTM level; all ro
     - em1 → LAN (Isolated Network)
     - em2 → GUEST (Isolated Network)
 
+![Network Interface assignment](screenshots/utm_network_assignment.png)
+
 This order ensures the interfaces match the addressing plan later on.
 
 ## Client VMs
@@ -59,10 +61,15 @@ Two lightweight Linux VMs are prepared:
     - Architecture: ARM64 (aarch64)
     - Network: LAN isolated network
     - Receives IP via DHCP from OPNsense
+
+![LAN-VM architecture](screenshots/utm_lan_vm_architecture.png)
+
 ### GUEST Client
     - Architecture: ARM64 (aarch64)
     - Network: GUEST isolated network
     - Receives IP via DHCP from OPNsense
+
+![GUEST-VM architecture](screenshots/utm_guest_vm_architecture.png)
 
 These machines are used to verify segmentation, firewall behavior, and DNS/Internet functionality.
 
