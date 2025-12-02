@@ -28,7 +28,8 @@ I entered the following values:
   - IPv4 address: 192.168.10.1
   - Subnet mask: /24
   - IPv6 configuration: none
-  - Enable DHCP server on LAN: N
+  - Enable DHCP server on LAN: Y
+  - Range: 192.168.10.50 - 192.168.10.200
   - Revert to HTTP instead of HTTPS: N
 
 Once confirmed, OPNsense updates the LAN address.

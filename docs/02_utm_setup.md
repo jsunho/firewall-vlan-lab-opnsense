@@ -10,6 +10,7 @@ Three separate virtual networks are created inside UTM to simulate a multi-segme
 
 ### 1. WAN Network
 Mode: Shared Network (NAT)
+Emulated Network Card: virtio-net-pci
 Purpose: Provide external connectivity via macOS
 Assigns IP to OPNsense automatically through DHCP
 Used only by the firewall VM
@@ -45,9 +46,9 @@ The LAN and GUEST networks are isolated from each other at the UTM level; all ro
 ![OPNsense VM architecture](screenshots/utm_firewall_vm_architecture.png)
 
 ### Network Interfaces (in order)
-    - em0 → WAN (Shared Network)
-    - em1 → LAN (Isolated Network)
-    - em2 → GUEST (Isolated Network)
+    - vtnet0 → WAN (Shared Network)
+    - vtnet1 → LAN (Isolated Network)
+    - vtnet2 → GUEST (Isolated Network)
 
 ![Network Interface assignment](screenshots/utm_network_assignment.png)
 
@@ -77,9 +78,9 @@ These machines are used to verify segmentation, firewall behavior, and DNS/Inter
 
 At this stage, the UTM environment provides the following:
 
-    - Three isolated virtual networks
-    - One emulated OPNsense firewall VM connected to all networks
-    - Two client VMs connected to their respective LAN and GUEST networks
-    - A clean foundation for further installation and configuration steps
+  - Three isolated virtual networks
+  - One emulated OPNsense firewall VM connected to all networks
+  - Two client VMs connected to their respective LAN and GUEST networks
+  - A clean foundation for further installation and configuration steps
     
 This setup mirrors the topology of a small-business network with separate trusted and guest environments.

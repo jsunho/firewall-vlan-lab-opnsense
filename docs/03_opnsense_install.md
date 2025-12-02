@@ -38,7 +38,7 @@ Here is how I created the VM:
     - NIC 2 → LAN-Net
     - NIC 3 → GUEST-Net
     
-The order matters, because OPNsense usually detects them as em0, em1, and em2.
+The order matters, because OPNsense usually detects them as vtnet0, vtnet1, and vtnet2.
 
 ## 3. Booting into the Installer
 
@@ -89,15 +89,15 @@ I answered N to both because I only use plain interfaces.
     
 Then OPNsense shows the detected interfaces (usually):
 
-  em0
-  em1
-  em2
+  vtnet0
+  vtnet1
+  vtnet2
 
 I assigned them like this:
 
-  WAN → em0
-  LAN → em1
-  GUEST (OPT1) → em2
+  WAN → vtnet0
+  LAN → vtnet1
+  GUEST (OPT1) → vtnet2
 
 After confirming, the assignments were applied.
 
