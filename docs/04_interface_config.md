@@ -55,13 +55,12 @@ After confirming, the new IP for the GUEST network becomes active.
 
 ## 5. DHCP Server Configuration
 
-OPNsense provides multiple DHCP services (ISC DHCPv4 and Dnsmasq).
-For this lab, ISC DHCPv4 is used for both LAN and OPT1.
+After setting the IP addresses for the LAN and OPT1 interfaces, I needed to make sure that only one DHCP service is active. OPNsense provides two different DHCP systems: ISC DHCPv4 and Dnsmasq.
+For this project, I use ISC DHCPv4 only, because it is automatically enabled when I select “Enable DHCP” during the console setup.
 
-Important: Only one DHCP service must be active per interface.
-Dnsmasq DHCP must remain disabled, otherwise ISC DHCPv4 cannot bind
-to port 67 ("address already in use") and clients will fall back
-to 169.254.x.x.
+To avoid conflicts, I keep Dnsmasq DHCP disabled. If both DHCP services try to run on the same interface, ISC DHCPv4 cannot start and shows the error “address already in use”. In that case, the clients would fail to receive an IP address and would fall back to a 169.254.x.x address.
+
+By keeping Dnsmasq DHCP turned off, I ensure that ISC DHCPv4 runs correctly on both LAN and OPT1, and that the client VMs can obtain their IP addresses without any issues.
 
 ## 6. Verifying the Configuration
 
