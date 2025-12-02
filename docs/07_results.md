@@ -19,7 +19,7 @@ From the LAN VM, I opened Firefox and entered:
     https://192.168.10.1
 
 Result: 
-  The login page loaded successfully
+  The login page loaded successfully.
 
 This confirmes that the LAN network can reach OPNsense.
 

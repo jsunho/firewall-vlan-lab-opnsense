@@ -52,7 +52,7 @@ I added the following rule:
 This rule must be moved above the default “Allow LAN to any” rule.
 This way, LAN machines cannot reach the GUEST network.
 
-## 3. GUEST Rules (OPT1 → em2)
+## 3. GUEST Rules (OPT1 → vtnet2)
 
 To configure the GUEST network, I went to:
   
@@ -109,11 +109,11 @@ This helps when checking reachability.
 
 Correct rule order is important because OPNsense evaluates rules from top to bottom.
 
-### LAN (em1)
+### LAN (vtnet1)
   
   1. Block LAN → any (default)
 
-### GUEST (OPT1 / em2)
+### GUEST (OPT1 / vtnet2)
   1. Block GUEST → LAN
   2. Allow DNS
   3. Allow ICMP (optional)

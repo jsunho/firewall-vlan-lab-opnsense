@@ -47,7 +47,8 @@ Here I entered:
   - IPv4 address: 192.168.20.1
   - Subnet mask: /24
   - IPv6 configuration: none
-  - Enable DHCP server on OPT1: N
+  - Enable DHCP server on OPT1: Y
+  - Range: 192.168.20.50 - 192.168.20.200
   - Revert to HTTP instead of HTTPS: N
 
 After confirming, the new IP for the GUEST network becomes active.

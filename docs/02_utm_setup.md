@@ -1,86 +1,94 @@
-## UTM Environment Preparation
+## 1. UTM Environment Preparation
 
-This lab uses UTM on macOS to create an isolated virtual network environment consisting of one firewall VM and two client VMs. UTM provides all necessary virtual switches, NAT services, and interface mappings without affecting the host system.
-Because OPNsense requires an x86_64 environment, the firewall VM is executed using full emulation.
-The client VMs run natively as ARM64 Linux machines.
+This lab uses UTM on macOS to build a small virtual network environment with one firewall VM and two client VMs. UTM gives me all the virtual switches, NAT services, and interface mappings I need without touching the host system.
+Because OPNsense requires x86_64, the firewall VM has to run in full emulation.
+The client VMs run normally as ARM64 Linux machines.
 
-## Virtual Networks
+## 2. Virtual Networks
 
-Three separate virtual networks are created inside UTM to simulate a multi-segment infrastructure:
+I created three separate virtual networks in UTM. These will later match how the real multi-segment setup works.
 
 ### 1. WAN Network
-Mode: Shared Network (NAT)
-Emulated Network Card: virtio-net-pci
-Purpose: Provide external connectivity via macOS
-Assigns IP to OPNsense automatically through DHCP
-Used only by the firewall VM
+
+  - Mode: Shared Network (NAT)
+  - Emulated Network Card: virtio-net-pci
+  - Purpose: Gives OPNsense Internet access through macOS
+  - UTM automatically provides DHCP here
+  - Used only by the firewall VM
 
 ![WAN interface assignment](screenshots/utm_settings_network_wan.png)
 
 ### 2. LAN Network
-Mode: Isolated Network
-Used by the trusted LAN client VM
-Connected to OPNsense as its primary internal interface
+
+  - Mode: Isolated Network
+  - Emulated Network Card: virtio-net-pci
+  - Used by the trusted LAN client VM
+  - Connected to OPNsense as the main internal network
 
 ![LAN interface assignment](screenshots/utm_settings_network_lan.png) 
 
 ### 3. GUEST Network
-Mode: Isolated Network
+
+  - Mode: Isolated Network
 Used by the guest client VM
-Connected to OPNsense as a restricted interface
+Connected to OPNsense as a restricted network
 
 ![GUEST interface assignment](screenshots/utm_settings_network_guest.png)
 
-The LAN and GUEST networks are isolated from each other at the UTM level; all routing between them is controlled by OPNsense.
+LAN and GUEST are completely isolated inside UTM.
+Any communication between them will later go through OPNsense only.
 
-
-## OPNsense VM Setup in UTM
+## 3. OPNsense VM Setup in UTM
 
 ### Hardware Configuration
-    - Architecture: x86_64 (emulated)
-    - Memory: 2–4 GB (depending on host resources)
-    - CPU: 2 cores recommended
-    - Disk: 16–32 GB
-    - Boot ISO: OPNsense installation image
+
+  - Architecture: x86_64 (emulated)
+  - Memory: 2–4 GB (depending on host resources)
+  - CPU: 2 cores recommended
+  - Disk: 16–32 GB
+  - Boot ISO: OPNsense installation image
 
 ![OPNsense VM architecture](screenshots/utm_firewall_vm_architecture.png)
 
 ### Network Interfaces (in order)
-    - vtnet0 → WAN (Shared Network)
-    - vtnet1 → LAN (Isolated Network)
-    - vtnet2 → GUEST (Isolated Network)
+
+  - vtnet0 → WAN (Shared Network)
+  - vtnet1 → LAN (Isolated Network)
+  - vtnet2 → GUEST (Isolated Network)
 
 ![Network Interface assignment](screenshots/utm_network_assignment.png)
 
-This order ensures the interfaces match the addressing plan later on.
+The order matters so that OPNsense assigns the interfaces correctly.
 
-## Client VMs
+## 4. Client VMs
 
-Two lightweight Linux VMs are prepared:
+I prepared two small Linux VMs for testing later.
 
 ### LAN Client
-    - Architecture: ARM64 (aarch64)
-    - Network: LAN isolated network
-    - Receives IP via DHCP from OPNsense
+  
+  - Architecture: ARM64 (aarch64)
+  - Network: LAN isolated network
+  - Receives its IP through DHCP from OPNsense
 
 ![LAN-VM architecture](screenshots/utm_lan_vm_architecture.png)
 
 ### GUEST Client
-    - Architecture: ARM64 (aarch64)
-    - Network: GUEST isolated network
-    - Receives IP via DHCP from OPNsense
+  
+  - Architecture: ARM64 (aarch64)
+  - Network: GUEST isolated network
+  - Also receives an IP via DHCP from OPNsense
 
 ![GUEST-VM architecture](screenshots/utm_guest_vm_architecture.png)
 
-These machines are used to verify segmentation, firewall behavior, and DNS/Internet functionality.
+These VMs will help verify segmentation, firewall rules, routing, and Internet access.
 
-## Summary
+## 5. Summary
 
-At this stage, the UTM environment provides the following:
+At this point, the UTM environment is ready:
 
   - Three isolated virtual networks
   - One emulated OPNsense firewall VM connected to all networks
-  - Two client VMs connected to their respective LAN and GUEST networks
-  - A clean foundation for further installation and configuration steps
+  - Two client VMs connected to LAN and GUEST
+  - A clean foundation for everything that comes next
     
-This setup mirrors the topology of a small-business network with separate trusted and guest environments.
+This setup acts like a small two-segment network with a firewall in between.
