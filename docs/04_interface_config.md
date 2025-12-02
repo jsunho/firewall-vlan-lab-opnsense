@@ -20,7 +20,7 @@ Inside the OPNsense console menu, I selected:
 
 After that, OPNsense asks which interface I want to configure.
 
-## 3. Configuring the LAN Interface (em1)
+## 3. Configuring the LAN Interface (vtnet1)
 
 When I select the LAN interface, OPNsense asks a few questions.
 I entered the following values:
@@ -34,7 +34,7 @@ I entered the following values:
 
 Once confirmed, OPNsense updates the LAN address.
 
-## 4. Configuring the GUEST Interface (OPT1 / em2)
+## 4. Configuring the GUEST Interface (OPT1 / vtnet2)
 
 To configure the GUEST interface, I repeated the same menu option:
 
@@ -53,7 +53,17 @@ Here I entered:
 
 After confirming, the new IP for the GUEST network becomes active.
 
-## 5. Verifying the Configuration
+## 5. DHCP Server Configuration
+
+OPNsense provides multiple DHCP services (ISC DHCPv4 and Dnsmasq).
+For this lab, ISC DHCPv4 is used for both LAN and OPT1.
+
+Important: Only one DHCP service must be active per interface.
+Dnsmasq DHCP must remain disabled, otherwise ISC DHCPv4 cannot bind
+to port 67 ("address already in use") and clients will fall back
+to 169.254.x.x.
+
+## 6. Verifying the Configuration
 
 To make sure everything is set correctly, I opened the menu:
 
@@ -62,13 +72,13 @@ To make sure everything is set correctly, I opened the menu:
 Here OPNsense shows the current interface assignments.
 It should look like this:
 
-  - LAN (em1) → 192.168.10.1/24
-  - OPT1 (em2) → 192.168.20.1/24
-  - WAN (em0) → DHCP
+  - LAN (vtnet1) → 192.168.10.1/24
+  - OPT1 (vtnet2) → 192.168.20.1/24
+  - WAN (vtnet0) → DHCP
 
 If these values match, the interface setup is complete.
 
-## 6. Accessing the WebGUI
+## 7. Accessing the WebGUI
 
 The WebGUI cannot be opened from the firewall console itself.
 To continue, I switch to the LAN client VM (configured in the next chapter).

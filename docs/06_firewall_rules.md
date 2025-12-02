@@ -90,7 +90,10 @@ Place this rule above the allow-internet rule to keep it clear and readable.
 
 If GUEST clients should be able to resolve domains, they need DNS:
 
+  - Action: Pass
+  - Interface: OPT1
   - Protocol: TCP/UDP
+  - Source: OPT1 net
   - Destination: OPT1 address
   - Port: 53
   - Description: DNS for GUEST clients
@@ -111,13 +114,15 @@ Correct rule order is important because OPNsense evaluates rules from top to bot
 
 ### LAN (vtnet1)
   
-  1. Block LAN → any (default)
+  1. Block LAN → GUEST
 
 ### GUEST (OPT1 / vtnet2)
-  1. Block GUEST → LAN
-  2. Allow DNS
-  3. Allow ICMP (optional)
-  4. Allow GUEST → any (internet)
+
+  1. Allow DHCP
+  2. Block GUEST → LAN
+  3. Allow DNS
+  4. Allow ICMP (optional)
+  5. Allow GUEST → any (internet)
 
 ## 5. Testing the Rules
 
