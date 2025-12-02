@@ -116,6 +116,8 @@ Correct rule order is important because OPNsense evaluates rules from top to bot
   
   1. Block LAN → GUEST
 
+![Firewall Rules LAN](screenshots/opnsense_firewall_rules_lan.png)
+
 ### GUEST (OPT1 / vtnet2)
 
   1. Allow DHCP
@@ -123,6 +125,8 @@ Correct rule order is important because OPNsense evaluates rules from top to bot
   3. Allow DNS
   4. Allow ICMP (optional)
   5. Allow GUEST → any (internet)
+
+![Firewall Rules OPT1](screenshots/opnsense_firewall_rules_opt1.png)
 
 ## 5. Testing the Rules
 
