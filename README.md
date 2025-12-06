@@ -1,7 +1,17 @@
 **Short Summary**  
+
 This lab simulates a multi-network environment using OPNsense, VLANs, DHCP, DNS, and firewall rules.  
 The goal was to understand segmentation, routing, virtualization on macOS M1, and real-world firewall administration.  
 It includes full documentation, configuration examples, and a reproducible setup.
+
+**Skills Demonstrated**
+
+  - VLAN configuration
+  - Inter-VLAN routing
+  - DHCP & DNS setup
+  - Firewall rule design
+  - Virtualization troubleshooting
+  - Documentation best practices
 
 
 # Firewall + VLAN Lab (OPNsense on UTM / macOS M1)
